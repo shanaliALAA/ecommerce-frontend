@@ -53,34 +53,19 @@ const Home = () => {
     <div className="container">
       <style>{`
         @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          from { opacity: 0; transform: translateX(-20px); }
+          to { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes float {
-          0%, 100% { transform: translateY(0px); }
+          0%,100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
         }
-
         @keyframes pulse {
-          0%, 100% { transform: scale(1); }
+          0%,100% { transform: scale(1); }
           50% { transform: scale(1.05); }
         }
 
@@ -95,13 +80,11 @@ const Home = () => {
           transition: all 0.8s ease;
           box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
-
         .hero-content {
           position: relative;
           z-index: 2;
           animation: ${isVisible ? 'fadeInUp 0.8s ease' : 'none'};
         }
-
         .hero-title {
           font-size: 3rem;
           margin-bottom: 1rem;
@@ -109,17 +92,14 @@ const Home = () => {
           font-weight: 700;
           text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
-
         .hero-subtitle {
           font-size: 1.3rem;
           color: rgba(255,255,255,0.95);
           margin-bottom: 2rem;
         }
-
         .hero-btn {
           animation: pulse 2s infinite;
         }
-
         .features-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -128,7 +108,6 @@ const Home = () => {
           opacity: ${isVisible ? 1 : 0};
           animation: ${isVisible ? 'fadeInUp 0.8s ease 0.3s forwards' : 'none'};
         }
-
         .feature-card {
           text-align: center;
           padding: 2rem;
@@ -138,31 +117,26 @@ const Home = () => {
           transition: all 0.3s ease;
           cursor: pointer;
         }
-
         .feature-card:hover {
           transform: translateY(-10px);
           box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
-
         .feature-icon {
           font-size: 3rem;
           margin-bottom: 1rem;
           display: inline-block;
           animation: float 3s ease-in-out infinite;
         }
-
         .feature-title {
           font-size: 1.2rem;
           font-weight: 600;
           color: #2c3e50;
           margin-bottom: 0.5rem;
         }
-
         .feature-desc {
           color: #7f8c8d;
           font-size: 0.9rem;
         }
-
         .section-title {
           font-size: 2.5rem;
           margin-bottom: 2rem;
@@ -171,12 +145,13 @@ const Home = () => {
           opacity: ${isVisible ? 1 : 0};
           animation: ${isVisible ? 'slideIn 0.6s ease 0.5s forwards' : 'none'};
         }
-
         .products-grid {
           opacity: ${isVisible ? 1 : 0};
           animation: ${isVisible ? 'fadeInUp 0.8s ease 0.7s forwards' : 'none'};
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 2rem;
         }
-
         .cta-section {
           text-align: center;
           margin-top: 4rem;
@@ -187,19 +162,13 @@ const Home = () => {
           opacity: ${isVisible ? 1 : 0};
           animation: ${isVisible ? 'fadeInUp 0.8s ease 0.9s forwards' : 'none'};
         }
-
-        .cta-title {
-          font-size: 2rem;
-          margin-bottom: 1rem;
-        }
-
+        .cta-title { font-size: 2rem; margin-bottom: 1rem; }
         .slide-indicators {
           display: flex;
           justify-content: center;
           gap: 10px;
           margin-top: 2rem;
         }
-
         .slide-dot {
           width: 10px;
           height: 10px;
@@ -208,13 +177,11 @@ const Home = () => {
           cursor: pointer;
           transition: all 0.3s ease;
         }
-
         .slide-dot.active {
           background: white;
           width: 30px;
           border-radius: 5px;
         }
-
         .shop-now-btn {
           font-size: 1.1rem;
           padding: 15px 40px;
@@ -227,39 +194,40 @@ const Home = () => {
           transition: all 0.3s ease;
           box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-
         .shop-now-btn:hover {
           transform: scale(1.05);
           box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-          .hero-title {
-            font-size: 2rem;
-          }
-          .hero-subtitle {
-            font-size: 1rem;
-          }
-          .features-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-          }
+          .hero-section { padding: 2rem 1rem; border-radius: 15px; }
+          .hero-title { font-size: 2rem; }
+          .hero-subtitle { font-size: 1rem; }
+          .shop-now-btn { padding: 12px 25px; font-size: 1rem; }
+          .features-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+          .products-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+          .cta-section { padding: 2rem 1rem; border-radius: 15px; }
+          .cta-title { font-size: 1.5rem; }
+        }
+        @media (max-width: 480px) {
+          .features-grid { grid-template-columns: 1fr; gap: 1rem; }
+          .products-grid { grid-template-columns: 1fr; }
         }
       `}</style>
 
+      {/* HERO SECTION */}
       <div className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">{heroSlides[currentSlide].text}</h1>
           <p className="hero-subtitle">{heroSlides[currentSlide].sub}</p>
           <Link to="/products">
-            <button className="shop-now-btn hero-btn">
-              Shop Now →
-            </button>
+            <button className="shop-now-btn hero-btn">Shop Now →</button>
           </Link>
           <div className="slide-indicators">
             {heroSlides.map((_, idx) => (
               <div 
-                key={idx}
+                key={idx} 
                 className={`slide-dot ${currentSlide === idx ? 'active' : ''}`}
                 onClick={() => setCurrentSlide(idx)}
               />
@@ -268,6 +236,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* FEATURES */}
       <div className="features-grid">
         {features.map((feature, idx) => (
           <div key={idx} className="feature-card" style={{ animationDelay: `${idx * 0.1}s` }}>
@@ -280,17 +249,15 @@ const Home = () => {
         ))}
       </div>
 
+      {/* FEATURED PRODUCTS */}
       <div style={{ marginTop: '4rem' }}>
         <h2 className="section-title">Featured Products ✨</h2>
 
         {loading && <Loader />}
-
         {error && <div className="error-message">{error}</div>}
-
         {!loading && !error && featuredProducts.length === 0 && (
           <p style={{ textAlign: 'center', color: '#7f8c8d' }}>No products available at the moment.</p>
         )}
-
         {!loading && !error && featuredProducts.length > 0 && (
           <div className="products-grid">
             {featuredProducts.map((product) => (
@@ -300,15 +267,14 @@ const Home = () => {
         )}
       </div>
 
+      {/* CTA SECTION */}
       <div className="cta-section">
         <h2 className="cta-title">Ready to Upgrade Your Style?</h2>
         <p style={{ fontSize: '1.1rem', marginBottom: '2rem', opacity: 0.9 }}>
           Explore our full collection and find your perfect match
         </p>
         <Link to="/products">
-          <button className="shop-now-btn">
-            View All Products
-          </button>
+          <button className="shop-now-btn">View All Products</button>
         </Link>
       </div>
     </div>
