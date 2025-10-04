@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
   const { user, logout, getCartCount } = useCart();
   const cartCount = getCartCount();
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const closeMenu = () => setIsMenuOpen(false);
 
   const handleLogout = () => {
     logout();
@@ -15,19 +20,31 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container">
         <div className="navbar-content">
-          <Link to="/" className="navbar-brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Link to="/" className="navbar-brand" onClick={closeMenu} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <img src="/logo.svg" alt="Trendify Logo" style={{ height: '32px', width: '32px' }} />
             Trendify
           </Link>
-          <ul className="navbar-links">
+          <button
+            className="navbar-toggle"
+            aria-label="Toggle navigation"
+            aria-controls="primary-navigation"
+            aria-expanded={isMenuOpen}
+            onClick={toggleMenu}
+          >
+            <span className="bar" />
+            <span className="bar" />
+            <span className="bar" />
+          </button>
+
+          <ul id="primary-navigation" className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={closeMenu}>Home</Link>
             </li>
             <li>
-              <Link to="/products">Products</Link>
+              <Link to="/products" onClick={closeMenu}>Products</Link>
             </li>
             <li>
-              <Link to="/cart">
+              <Link to="/cart" onClick={closeMenu}>
                 Cart
                 {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
               </Link>
@@ -38,7 +55,7 @@ const Navbar = () => {
                   <span>Hello, {user.name}</span>
                 </li>
                 <li>
-                  <button onClick={handleLogout} className="btn btn-danger" style={{ padding: '5px 15px' }}>
+                  <button onClick={() => { handleLogout(); closeMenu(); }} className="btn btn-danger" style={{ padding: '5px 15px' }}>
                     Logout
                   </button>
                 </li>
@@ -46,10 +63,10 @@ const Navbar = () => {
             ) : (
               <>
                 <li>
-                  <Link to="/login">Login</Link>
+                  <Link to="/login" onClick={closeMenu}>Login</Link>
                 </li>
                 <li>
-                  <Link to="/register">Register</Link>
+                  <Link to="/register" onClick={closeMenu}>Register</Link>
                 </li>
               </>
             )}

@@ -21,6 +21,7 @@ const ProductCard = ({ product }) => {
       <img
         src={product.image || 'https://via.placeholder.com/300x250?text=No+Image'}
         alt={product.name}
+        loading="lazy"
         className="product-image"
       />
       <div className="product-info">

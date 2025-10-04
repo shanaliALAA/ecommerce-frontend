@@ -393,7 +393,7 @@ const Cart = () => {
           Shopping Cart
         </h1>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+        <div className="cart-layout">
           <div>
             {cart.map((item) => (
               <div key={item._id} className="cart-item">
@@ -401,6 +401,7 @@ const Cart = () => {
                   <img
                     src={item.image || 'https://via.placeholder.com/80?text=No+Image'}
                     alt={item.name}
+                    loading="lazy"
                     className="cart-item-image"
                   />
                   <div>
