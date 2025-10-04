@@ -77,6 +77,7 @@ const ProductDetails = () => {
             <img
               src={product.image || 'https://via.placeholder.com/500?text=No+Image'}
               alt={product.name}
+              loading="lazy"
               className="product-details-image"
             />
           </div>

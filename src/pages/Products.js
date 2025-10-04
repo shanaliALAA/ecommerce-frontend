@@ -315,6 +315,7 @@ const Products = () => {
             <img
               src={categoryImages[cat.label]}
               alt={cat.label}
+              loading="lazy"
               style={{
                 position: "absolute",
                 top: 0,
@@ -400,6 +401,7 @@ const Products = () => {
           <img
             src={categoryImages.All || "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&h=800&fit=crop"}
             alt="All Products"
+            loading="lazy"
             style={{
               position: "absolute",
               top: 0,
