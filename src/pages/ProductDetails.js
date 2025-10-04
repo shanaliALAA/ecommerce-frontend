@@ -75,9 +75,10 @@ const ProductDetails = () => {
         <div className="product-details-container">
           <div>
             <img
-              src={product.image || 'https://via.placeholder.com/500?text=No+Image'}
+              src={product.image || 'https://via.placeholder.com/800x600?text=No+Image'}
               alt={product.name}
               className="product-details-image"
+              loading="lazy"
             />
           </div>
           <div>

@@ -19,9 +19,10 @@ const ProductCard = ({ product }) => {
   return (
     <div className="product-card" onClick={handleViewDetails}>
       <img
-        src={product.image || 'https://via.placeholder.com/300x250?text=No+Image'}
+        src={product.image || 'https://via.placeholder.com/600x400?text=No+Image'}
         alt={product.name}
         className="product-image"
+        loading="lazy"
       />
       <div className="product-info">
         <h3 className="product-title">{product.name}</h3>

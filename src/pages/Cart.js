@@ -177,7 +177,7 @@ const Cart = () => {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px' }}>
+            <div className="form-grid-2" style={{ marginBottom: '15px' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '5px', fontWeight: '500' }}>
                   Email *
@@ -238,7 +238,7 @@ const Cart = () => {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px', marginBottom: '20px' }}>
+            <div className="form-grid-3" style={{ marginBottom: '20px' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '5px', fontWeight: '500' }}>
                   City *
@@ -393,7 +393,7 @@ const Cart = () => {
           Shopping Cart
         </h1>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+        <div className="cart-grid">
           <div>
             {cart.map((item) => (
               <div key={item._id} className="cart-item">

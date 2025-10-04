@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
   const { user, logout, getCartCount } = useCart();
   const cartCount = getCartCount();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -19,7 +20,16 @@ const Navbar = () => {
             <img src="/logo.svg" alt="Trendify Logo" style={{ height: '32px', width: '32px' }} />
             Trendify
           </Link>
-          <ul className="navbar-links">
+          <button
+            aria-label="Toggle menu"
+            className="navbar-toggle"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul className={`navbar-links ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(false)}>
             <li>
               <Link to="/">Home</Link>
             </li>
