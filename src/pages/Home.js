@@ -273,9 +273,15 @@ const Home = () => {
         <p style={{ fontSize: '1.1rem', marginBottom: '2rem', opacity: 0.9 }}>
           Explore our full collection and find your perfect match
         </p>
-        <Link to="/products">
-          <button className="shop-now-btn">View All Products</button>
-        </Link>
+        <Link 
+  to="/products"
+  onClick={() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }}
+>
+  <button className="shop-now-btn">View All Products</button>
+</Link>
+
       </div>
     </div>
   );

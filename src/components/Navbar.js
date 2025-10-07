@@ -34,19 +34,19 @@ const Navbar = () => {
         .navbar .container {
           max-width: 1400px;
           margin: 0 auto;
-          padding: 0 1.5rem;
+          padding: 0 clamp(1rem, 3vw, 1.5rem);
         }
 
         .navbar-content {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          height: 70px;
+          height: clamp(60px, 10vw, 70px);
           position: relative;
         }
 
         .navbar-brand {
-          font-size: 1.5rem;
+          font-size: clamp(1.2rem, 4vw, 1.5rem);
           font-weight: 700;
           color: #667eea !important;
           text-decoration: none;
@@ -54,7 +54,7 @@ const Navbar = () => {
           z-index: 1001;
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: clamp(6px, 2vw, 8px);
         }
 
         .navbar-brand:hover {
@@ -62,8 +62,8 @@ const Navbar = () => {
         }
 
         .navbar-brand img {
-          height: 32px;
-          width: 32px;
+          height: clamp(28px, 6vw, 32px);
+          width: clamp(28px, 6vw, 32px);
         }
 
         .navbar-toggle {
@@ -74,20 +74,20 @@ const Navbar = () => {
           cursor: pointer;
           padding: 0.5rem;
           z-index: 1001;
-          gap: 5px;
+          gap: clamp(4px, 1vw, 5px);
         }
 
         .navbar-toggle span {
           display: block;
-          width: 26px;
-          height: 3px;
+          width: clamp(22px, 5vw, 26px);
+          height: clamp(2.5px, 0.6vw, 3px);
           background: #333;
           border-radius: 3px;
           transition: all 0.3s ease;
         }
 
         .navbar-toggle.active span:nth-child(1) {
-          transform: rotate(45deg) translate(7px, 7px);
+          transform: rotate(45deg) translate(clamp(6px, 1.5vw, 7px), clamp(6px, 1.5vw, 7px));
         }
 
         .navbar-toggle.active span:nth-child(2) {
@@ -95,7 +95,7 @@ const Navbar = () => {
         }
 
         .navbar-toggle.active span:nth-child(3) {
-          transform: rotate(-45deg) translate(7px, -7px);
+          transform: rotate(-45deg) translate(clamp(6px, 1.5vw, 7px), clamp(-6px, -1.5vw, -7px));
         }
 
         .navbar-links {
@@ -104,7 +104,7 @@ const Navbar = () => {
           margin: 0;
           padding: 0;
           align-items: center;
-          gap: 2.5rem;
+          gap: clamp(1.5rem, 4vw, 2.5rem);
         }
 
         .navbar-links li {
@@ -115,7 +115,7 @@ const Navbar = () => {
           color: #333;
           text-decoration: none;
           font-weight: 500;
-          font-size: 1rem;
+          font-size: clamp(0.9rem, 2.5vw, 1rem);
           transition: color 0.3s ease;
           position: relative;
           padding: 0.5rem 0;
@@ -129,32 +129,38 @@ const Navbar = () => {
         .navbar-links span {
           color: #333;
           font-weight: 500;
-          font-size: 1rem;
+          font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
 
+        /* RESPONSIVE CART BADGE - THE KEY FIX */
         .cart-badge {
           position: absolute;
-          top: -8px;
-          right: -12px;
+          top: clamp(-10px, -2vw, -8px);
+          right: clamp(-14px, -3vw, -12px);
           background: #667eea;
           color: white;
           border-radius: 50%;
-          padding: 3px 7px;
-          font-size: 0.7rem;
+          padding: clamp(2px, 0.8vw, 3px) clamp(5px, 1.5vw, 7px);
+          font-size: clamp(0.65rem, 2vw, 0.7rem);
           font-weight: 700;
-          min-width: 20px;
+          min-width: clamp(18px, 4.5vw, 20px);
+          height: clamp(18px, 4.5vw, 20px);
           text-align: center;
           line-height: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
         }
 
         .btn {
-          padding: 8px 20px;
+          padding: clamp(6px, 2vw, 8px) clamp(16px, 4vw, 20px);
           border-radius: 6px;
           border: none;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
-          font-size: 0.95rem;
+          font-size: clamp(0.85rem, 2.5vw, 0.95rem);
         }
 
         .btn-danger {
@@ -225,17 +231,48 @@ const Navbar = () => {
             padding: 0.5rem 0;
             color: #333;
           }
+/* Fixed-size cart badge — same on all screens */
+.cart-badge {
+  position: absolute;
+  top: -8px;             /* adjust to align nicely with Cart text or icon */
+  right: -12px;          /* adjust as needed */
+  width: 18px;           /* fixed width */
+  height: 18px;          /* fixed height */
+  background-color: blue badge color */
+  color: white;          /* text color */
+  border-radius: 50%;    /* perfect circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;       /* small, fixed text size */
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
+  z-index: 10;
+  transform: none;       /* prevents scaling */
+}
 
-          .cart-badge {
-            top: 8px;
-            right: auto;
-            left: 35px;
-          }
+/* prevent other media queries from resizing it */
+@media (max-width: 768px),
+(max-width: 480px),
+(min-width: 1200px) {
+  .cart-badge {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 10px !important;
+    top: -8px !important;
+    right: -12px !important;
+  }
+}
+
+
+
 
           .btn-danger {
             width: 100%;
             padding: 12px 20px;
             margin-top: 0.5rem;
+            font-size: 1rem;
           }
 
           /* Overlay */
@@ -268,12 +305,31 @@ const Navbar = () => {
           }
 
           .navbar-brand img {
-            height: 28px !important;
-            width: 28px !important;
+            height: 26px !important;
+            width: 26px !important;
           }
 
           .navbar-links {
             width: 80%;
+          }
+
+          /* Extra small phones - smaller badge */
+          .cart-badge {
+            min-width: 18px;
+            height: 18px;
+            font-size: 0.65rem;
+            padding: 2px 5px;
+            left: 32px;
+          }
+        }
+
+        /* Large screens - slightly bigger badge */
+        @media (min-width: 1200px) {
+          .cart-badge {
+            min-width: 22px;
+            height: 22px;
+            font-size: 0.75rem;
+            padding: 3px 7px;
           }
         }
 

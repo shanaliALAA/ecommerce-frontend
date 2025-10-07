@@ -40,20 +40,28 @@ const Products = () => {
     if (cat === "all") {
       setFiltered(products);
     } else {
-      setFiltered(products.filter((p) => (p.category || "").toLowerCase() === cat.toLowerCase()));
+      setFiltered(
+        products.filter(
+          (p) => (p.category || "").toLowerCase() === cat.toLowerCase()
+        )
+      );
     }
     setTimeout(() => {
-      if (gridRef.current) gridRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (gridRef.current)
+        gridRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
   };
 
+  // ✅ Responsive card styles
   const cardStyle = (catValue) => ({
-    width: "100%",
-    maxWidth: 260,
-    height: 520,
+    width: "clamp(140px, 30vw, 260px)",
+    height: "clamp(260px, 60vw, 520px)",
     borderRadius: 20,
     background: active === catValue ? "#111" : "#aaa",
-    boxShadow: active === catValue ? "0 8px 32px #6366f155" : "0 2px 8px #6366f122",
+    boxShadow:
+      active === catValue
+        ? "0 8px 32px #6366f155"
+        : "0 2px 8px #6366f122",
     cursor: "pointer",
     position: "relative",
     overflow: "hidden",
@@ -62,8 +70,8 @@ const Products = () => {
     justifyContent: "center",
     transition: "all 0.25s cubic-bezier(.4,2,.6,1)",
     border: active === catValue ? "3px solid #6366f1" : "3px solid transparent",
-    flex: "0 0 auto", // fix for horizontal scroll
-    marginRight: 16,   // spacing between cards
+    flex: "0 0 auto",
+    marginRight: 16,
   });
 
   const imgStyle = (catValue) => ({
@@ -79,8 +87,21 @@ const Products = () => {
   });
 
   return (
-    <div className="container" style={{ minHeight: "80vh", padding: "2rem 1rem" }}>
-      <h1 style={{ textAlign: "center", fontSize: "2.5rem", marginBottom: "2rem", color: "#2c3e50" }}>
+    <div
+      className="container"
+      style={{
+        minHeight: "80vh",
+        padding: "2rem 1rem",
+      }}
+    >
+      <h1
+        style={{
+          textAlign: "center",
+          fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+          marginBottom: "2rem",
+          color: "#2c3e50",
+        }}
+      >
         Shop by Category
       </h1>
 
@@ -92,24 +113,43 @@ const Products = () => {
           justifyContent: "flex-start",
           gap: "1rem",
           marginBottom: "3rem",
-          flexWrap: "wrap",
+          flexWrap: "nowrap",
           overflowX: "auto",
           paddingBottom: 8,
           scrollbarWidth: "thin",
         }}
       >
         {categories.map((cat) => (
-          <div key={cat.value} onClick={() => handleCategory(cat.value)} style={cardStyle(cat.value)}>
-            <img src={categoryImages[cat.label]} alt={cat.label} style={imgStyle(cat.value)} />
-            <div style={{ position: "relative", zIndex: 2, width: "100%", textAlign: "center", paddingBottom: 32 }}>
+          <div
+            key={cat.value}
+            onClick={() => handleCategory(cat.value)}
+            style={cardStyle(cat.value)}
+          >
+            <img
+              src={categoryImages[cat.label]}
+              alt={cat.label}
+              style={imgStyle(cat.value)}
+            />
+            <div
+              style={{
+                position: "relative",
+                zIndex: 2,
+                width: "100%",
+                textAlign: "center",
+                paddingBottom: "clamp(16px, 3vw, 32px)",
+              }}
+            >
               <span
                 style={{
                   color: "#fff",
                   fontWeight: 700,
-                  fontSize: 22,
+                  fontSize: "clamp(1rem, 3vw, 1.5rem)",
                   letterSpacing: 1,
                   textShadow: "0 2px 8px #000a",
-                  borderBottom: active === cat.value ? "3px solid #fff" : "3px solid transparent",
+                  borderBottom:
+                    active === cat.value
+                      ? "3px solid #fff"
+                      : "3px solid transparent",
                   paddingBottom: 4,
                   transition: "border-bottom 0.2s",
                 }}
@@ -122,19 +162,33 @@ const Products = () => {
 
         <div onClick={() => handleCategory("all")} style={cardStyle("all")}>
           <img
-            src={categoryImages.All || "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&h=800&fit=crop"}
+            src={
+              categoryImages.All ||
+              "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&h=800&fit=crop"
+            }
             alt="All Products"
             style={imgStyle("all")}
           />
-          <div style={{ position: "relative", zIndex: 2, width: "100%", textAlign: "center", paddingBottom: 32 }}>
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              width: "100%",
+              textAlign: "center",
+              paddingBottom: "clamp(16px, 3vw, 32px)",
+            }}
+          >
             <span
               style={{
                 color: "#fff",
                 fontWeight: 700,
-                fontSize: 22,
+                fontSize: "clamp(1rem, 3vw, 1.5rem)",
                 letterSpacing: 1,
                 textShadow: "0 2px 8px #000a",
-                borderBottom: active === "all" ? "3px solid #fff" : "3px solid transparent",
+                borderBottom:
+                  active === "all"
+                    ? "3px solid #fff"
+                    : "3px solid transparent",
                 paddingBottom: 4,
                 transition: "border-bottom 0.2s",
               }}
@@ -145,6 +199,7 @@ const Products = () => {
         </div>
       </div>
 
+      {/* Product Grid */}
       {loading && <div style={{ textAlign: "center" }}>Loading products...</div>}
       {error && <div style={{ color: "red", textAlign: "center" }}>{error}</div>}
 
@@ -154,17 +209,25 @@ const Products = () => {
           className="products-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
             gap: "1rem",
             marginTop: "1.5rem",
           }}
         >
           {filtered.length === 0 ? (
-            <div style={{ gridColumn: "1/-1", textAlign: "center", color: "#7f8c8d" }}>
+            <div
+              style={{
+                gridColumn: "1/-1",
+                textAlign: "center",
+                color: "#7f8c8d",
+              }}
+            >
               No products found in this category.
             </div>
           ) : (
-            filtered.map((product) => <ProductCard key={product._id} product={product} />)
+            filtered.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))
           )}
         </div>
       )}
